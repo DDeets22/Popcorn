@@ -1,0 +1,28 @@
+body {
+  background-color: #880000;
+}
+
+h1 {
+  display: block;
+  text-indent: 10px;
+}
+h2 {
+  display: block;
+  text-indent: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ li {
+  float: left;
+}
+
+a {
+  display: block;
+  padding: 8px;
+  color: #ffffff;
+  background-color: #dd0000;
+}
