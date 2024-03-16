@@ -29,6 +29,7 @@ pageResult.write(template.read(808))
 #fist open the table tag
 pageResult.write("<table>\n")
 
+movies = 0
 #then read every movie's name
 for filename in os.listdir(directory):
     f = os.path.join(directory, filename)
@@ -36,12 +37,42 @@ for filename in os.listdir(directory):
     if os.path.isfile(f):
         pageResult.write("      <tr>\n")
         pageResult.write("          <th>")
-        pageResult.write(filename)
+        pageResult.write("<a href=\""+"Pages/"+"movieId" + str(movies) + ".html"+"\">"+filename+"</a>")
         pageResult.write("</th>\n")
-        pageResult.write("      </tr>\n")
+        pageResult.write("      </tr>\n") 
+    #after we generate its spot in the table, we need to generate that videos html page
+    #wipe it if it exists
+    videoPage = open("Pages/movieId" + str(movies) + ".html", "w")
+    videoPage.write("")
+    videoPage.close()
+
+    #now fill it with html
+    videoPage = open("Pages/movieId" + str(movies) + ".html", "a")
+
+    #open our video template
+    videoTemplate = open("test.html", "r")
+    videoPage.write(videoTemplate.read(790))
+    #close now that we're done with it
+    videoTemplate.close()
+
+    #write the rest of the html to the new page
+    videoPage.write("<source src=\""+"../Movies" + filename +"\" type=\"video/mp4\">\n")
+    videoPage.write("    Your browser does not support the video tag.\n")
+    videoPage.write("  </video>\n")
+    videoPage.write("</div>\n")
+    videoPage.write("</body>\n")
+    videoPage.write("</html>\n")
+    videoPage.close()
+    movies = movies + 1
 
 #now close the table and body tags
 pageResult.write("</table>")
 pageResult.write("</body>")
 
 pageResult.close()
+
+
+
+
+
+
